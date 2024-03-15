@@ -2,7 +2,7 @@
 
 # Necessary imports
 import streamlit as st
-from langchain_community.document_loaders import PyPDFLoader
+import PyPDF2
 import os
 import tempfile
 import uuid
@@ -41,13 +41,8 @@ class DocumentProcessor:
         ```
         """
         
-        # Step 1: Render a file uploader widget. Replace 'None' with the Streamlit file uploader code.
-        uploaded_files = st.file_uploader(
-            #####################################
-            # Allow only type `pdf`
-            # Allow multiple PDFs for ingestion
-            #####################################
-        )
+        # Render a file uploader widget: accept PDF only and accept multiple files 
+        uploaded_files = st.file_uploader("Upload a PDF file", type="pdf", accept_multiple_files=True)
         
         if uploaded_files is not None:
             for uploaded_file in uploaded_files:
@@ -61,15 +56,25 @@ class DocumentProcessor:
                 with open(temp_file_path, 'wb') as f:
                     f.write(uploaded_file.getvalue())
 
-                # Step 2: Process the temporary file
-                #####################################
-                # Use PyPDFLoader here to load the PDF and extract pages.
-                # https://python.langchain.com/docs/modules/data_connection/document_loaders/pdf#using-pypdf
-                # You will need to figure out how to use PyPDFLoader to process the temporary file.
-                
+                # Process the temporary file
+                """
+                    https://python.langchain.com/docs/modules/data_connection/document_loaders/pdf#using-pypdf
+                    Use PyPDFLoader here to load the PDF and extract pages.
+                    You will need to figure out how to use PyPDFLoader to process the temporary file.
+                """
+                # Process the file if there exists
+                if uploaded_file is not None:
+                    pdf_reader = PyPDF2.PdfReader(uploaded_file)
+                    num_pages = len(pdf_reader.pages)
+                    st.write(f"The PDF contains {num_pages} pages.")
+
                 # Step 3: Then, Add the extracted pages to the 'pages' list.
                 #####################################
-                
+                if uploaded_file is not None:
+                    for page_number in range(len(pdf_reader.pages)):
+                        page = pdf_reader.pages[page_number]
+                        self.pages.append(page.extract_text())
+
                 # Clean up by deleting the temporary file.
                 os.unlink(temp_file_path)
             

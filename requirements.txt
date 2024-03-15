@@ -3,3 +3,4 @@ chromadb
 langchain
 langchain-google-vertexai
 pypdf
+service         # I don't know why but 'service' is not included in any package above.
