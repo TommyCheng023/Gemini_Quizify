@@ -1,7 +1,8 @@
 # embedding_client.py
 
 from langchain_google_vertexai import VertexAIEmbeddings
-
+import os
+os.environ['GRPC_DNS_RESOLVER'] = 'native'
 class EmbeddingClient:
     """
     Task: Initialize the EmbeddingClient class to connect to Google Cloud's VertexAI for text embeddings.
@@ -33,9 +34,11 @@ class EmbeddingClient:
         # Initialize the VertexAIEmbeddings client with the given parameters
         # Read about the VertexAIEmbeddings wrapper from Langchain here
         # https://python.langchain.com/docs/integrations/text_embedding/google_generative_ai
-        self.client = VertexAIEmbeddings(
-            #### YOUR CODE HERE ####
-        )
+        try:
+            self.client = VertexAIEmbeddings(model_name=model_name, project=project, location=location)
+        except Exception as e:
+            print(f"Failed toinitialize client: {e}")
+            self.client = None
         
     def embed_query(self, query):
         """
@@ -44,8 +47,15 @@ class EmbeddingClient:
         :param query: The text query to embed.
         :return: The embeddings for the query or None if the operation fails.
         """
-        vectors = self.client.embed_query(query)
-        return vectors
+        if not self.client:
+            print("Embedding client not initialized.")
+            return None
+        try:
+            vectors = self.client.embed_query(query)
+            return vectors
+        except Exception as e:
+            print(f"Failed to retrieve embeddings for the query: {e}")
+            return None
     
     def embed_documents(self, documents):
         """
@@ -54,15 +64,22 @@ class EmbeddingClient:
         :param documents: A list of text documents to embed.
         :return: A list of embeddings for the given documents.
         """
+        if not self.client:
+            print("Embedding client not initialized.")
+            return None
         try:
             return self.client.embed_documents(documents)
         except AttributeError:
             print("Method embed_documents not defined for the client.")
             return None
+        except Exception as e:
+            print(f"Failed to retrieve embeddings for documents: {e}")
+            return None
 
+# test embedding
 if __name__ == "__main__":
     model_name = "textembedding-gecko@003"
-    project = "YOUR PROJECT ID HERE"
+    project = "gemini-quizify-417301"
     location = "us-central1"
 
     embedding_client = EmbeddingClient(model_name, project, location)
@@ -70,3 +87,5 @@ if __name__ == "__main__":
     if vectors:
         print(vectors)
         print("Successfully used the embedding client!")
+    else:
+        print("Failed to get embeddings...")
