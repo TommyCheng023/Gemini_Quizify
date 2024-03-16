@@ -37,7 +37,7 @@ class EmbeddingClient:
         try:
             self.client = VertexAIEmbeddings(model_name=model_name, project=project, location=location)
         except Exception as e:
-            print(f"Failed toinitialize client: {e}")
+            print(f"Failed to initialize client: {e}")
             self.client = None
         
     def embed_query(self, query):

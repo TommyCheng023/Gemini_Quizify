@@ -5,12 +5,12 @@ sys.path.append(os.path.abspath('../../'))
 from tasks.task_3.task_3 import DocumentProcessor
 from tasks.task_4.task_4 import EmbeddingClient
 
-
 # Import Task libraries
 from langchain_core.documents import Document
 from langchain.text_splitter import CharacterTextSplitter
 from langchain_community.vectorstores import Chroma
 
+os.environ['GRPC_DNS_RESOLVER'] = 'native'
 class ChromaCollectionCreator:
     def __init__(self, processor, embed_model):
         """
@@ -48,7 +48,7 @@ class ChromaCollectionCreator:
         Note: Ensure to replace placeholders like [Your code here] with actual implementation code as per the instructions above.
         """
         
-        # Step 1: Check for processed documents
+        # Check if the document exists
         if len(self.processor.pages) == 0:
             st.error("No documents found!", icon="🚨")
             return
@@ -57,7 +57,11 @@ class ChromaCollectionCreator:
         # Use a TextSplitter from Langchain to split the documents into smaller text chunks
         # https://python.langchain.com/docs/modules/data_connection/document_transformers/character_text_splitter
         # [Your code here for splitting documents]
-        
+        text_splitter = CharacterTextSplitter(separator=". ", chunk_size=500, chunk_overlap=100)
+        texts = []
+        for doc in self.processor.pages:
+            chunk = text_splitter.split_text(doc)
+            texts.extend(chunk)
         if texts is not None:
             st.success(f"Successfully split pages to {len(texts)} documents!", icon="✅")
 
@@ -65,7 +69,10 @@ class ChromaCollectionCreator:
         # https://docs.trychroma.com/
         # Create a Chroma in-memory client using the text chunks and the embeddings model
         # [Your code here for creating Chroma collection]
-        
+        documents = []
+        for text in texts:
+            documents.append(Document(page_content=text))
+        self.db = Chroma.from_documents(documents, self.embed_model)
         if self.db:
             st.success("Successfully created Chroma Collection!", icon="✅")
         else:
@@ -93,7 +100,7 @@ if __name__ == "__main__":
     
     embed_config = {
         "model_name": "textembedding-gecko@003",
-        "project": "YOUR PROJECT ID HERE",
+        "project": "gemini-quizify-417301",
         "location": "us-central1"
     }
     
