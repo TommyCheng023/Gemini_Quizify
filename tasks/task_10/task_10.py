@@ -93,6 +93,6 @@ if __name__ == "__main__":
                     correct_answer_key = index_question['answer']
                     if answer.startswith(correct_answer_key):
                         st.success("Correct!")
+                        st.write(f"Explanation: {index_question['explanation']}")   # let explanation appears only when the client gets the correct answer
                     else:
                         st.error("Incorrect!")
-                    st.write(f"Explanation: {index_question['explanation']}")
