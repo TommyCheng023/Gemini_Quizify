@@ -34,7 +34,6 @@ if __name__ == "__main__":
             topic_input = st.text_input(label="Topic for Generative Quiz", placeholder="Enter the topic of the document.")
             # 4) for the quiz topic and the desired number of questions
             num_questions = st.slider(label="Number of Questions", min_value=1, max_value=10, value=5)
-            st.write("You have selected", num_questions, "questions")
 
             submitted = st.form_submit_button("Generate a Quiz!")
             if submitted:
