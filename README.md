@@ -52,4 +52,5 @@ pip install PyPDF2
 - Ensure document processing, split text chunks using `CharacterTextSplitter`, and create a Chroma collection in memory. 
 
 <img width="754" alt="Screen Shot 2024-03-15 at 9 51 27 PM" src="https://github.com/TommyCheng023/Gemini_Quizify/assets/115842289/b0c73b14-ce16-4a4f-b80e-77edf05b6983">
+
 ### ⚠️ Important Notes
