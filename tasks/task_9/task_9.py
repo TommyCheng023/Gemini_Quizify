@@ -106,18 +106,14 @@ if __name__ == "__main__":
                 # Unpack choices for radio
                 choices = []
                 for choice in index_question['choices']: # For loop unpack the data structure
-                    ##### YOUR CODE HERE #####
                     # Set the key from the index question 
                     key = choice['key']
                     # Set the value from the index question
                     value = choice['value']
-                    ##### YOUR CODE HERE #####
                     choices.append(f"{key}) {value}")
                 
-                ##### YOUR CODE HERE #####
                 # Display the question onto streamlit
                 st.write(f"{index_question['question']}")
-                ##### YOUR CODE HERE #####
                 
                 answer = st.radio( # Display the radio button with the choices
                     'Choose the correct answer',
@@ -131,4 +127,3 @@ if __name__ == "__main__":
                         st.success("Correct!")
                     else:
                         st.error("Incorrect!")
-            ##########################################################
