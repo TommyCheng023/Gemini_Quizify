@@ -16,13 +16,10 @@ if __name__ == "__main__":
         "project": "gemini-quizify-417301",
         "location": "us-central1"
     }
-    
-    # Add Session State
+
+    # New Concept: `st.session_state[]`
     if 'question_bank' not in st.session_state or len(st.session_state['question_bank']) == 0:
-        
-        ##### YOUR CODE HERE #####
         st.session_state['question_bank'] = []
-        ##### YOUR CODE HERE #####
     
         screen = st.empty()
         with screen.container():
@@ -39,7 +36,7 @@ if __name__ == "__main__":
             
                 chroma_creator = ChromaCollectionCreator(processor, embed_client)
 
-                # Step 2: Set topic input and number of questions
+                # Set topic input and number of questions
                 topic_input = st.text_input("Topic for Generative Quiz", placeholder="Enter the topic of the document.")
                 questions = st.slider("Number of Questions", min_value=1, max_value=10, value=1)
                     
@@ -50,18 +47,14 @@ if __name__ == "__main__":
                         
                     if len(processor.pages) > 0:
                         st.write(f"Generating {questions} questions for topic: {topic_input}")
-                    
-                    ##### YOUR CODE HERE #####
+
                     generator = QuizGenerator(topic_input, questions, chroma_creator)
-                    # Step 3: Initialize a QuizGenerator class using the topic, number of questrions, and the chroma collection
                     question_bank = generator.generate_quiz()
-                    # Step 4: Initialize the question bank list in st.session_state
+
                     st.session_state['question_bank'] = question_bank
-                    # Step 5: Set a display_quiz flag in st.session_state to True
-                    st.session_state['display_quiz'] = True
-                    # Step 6: Set the question_index to 0 in st.session_state
+                    st.session_state['display_quiz'] = True             # set it to be true to allow quiz generation  
                     st.session_state['question_index'] = 0
-                    ##### YOUR CODE HERE #####
+                    st.experimental_rerun()                             # force rerun to let the app shows up the quiz
 
     elif st.session_state['display_quiz']:
         
@@ -72,7 +65,7 @@ if __name__ == "__main__":
             
             # Format the question and display it
             with st.form("MCQ"):
-                # Step 7: Set index_question using the Quiz Manager method get_question_at_index passing the st.session_state["question_index"]
+                # Set index_question using the Quiz Manager method get_question_at_index passing the st.session_state["question_index"]
                 index_question = quiz_manager.get_question_at_index(st.session_state["question_index"])
                 
                 # Unpack choices for radio button
@@ -92,8 +85,7 @@ if __name__ == "__main__":
                 
                 answer_choice = st.form_submit_button("Submit")
                 
-                # Step 8: Use the example below to navigate to the next and previous questions
-                # Here we use the next_question_index method from our quiz_manager class
+                # Use the example below to navigate to the next and previous questions
                 st.form_submit_button("Next Question", on_click=lambda: quiz_manager.next_question_index(direction=1))
                 st.form_submit_button("Previous Question", on_click=lambda: quiz_manager.next_question_index(direction=-1))
                 
