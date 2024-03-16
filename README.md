@@ -52,7 +52,9 @@ pip install PyPDF2
 [Langchain Text_Embedding](https://python.langchain.com/docs/integrations/text_embedding/google_generative_ai)
 
 ## 3. ChromaDB
-- Work on data transformation and collection with `ChromaDB`!
+- Work on data transformation and collection with `ChromaDB`, an open-source embedding database!
+<img width="725" alt="Screen Shot 2024-03-16 at 11 07 46 AM" src="https://github.com/TommyCheng023/Gemini_Quizify/assets/115842289/473b19d2-f539-4701-9230-7261b79e46bf">
+
 - Ensure document processing, split text chunks using `CharacterTextSplitter`, and create a Chroma collection in memory. 
 
 <img width="754" alt="Screen Shot 2024-03-15 at 9 51 27 PM" src="https://github.com/TommyCheng023/Gemini_Quizify/assets/115842289/b0c73b14-ce16-4a4f-b80e-77edf05b6983">
@@ -70,7 +72,7 @@ sys.path.append(os.path.abspath('../../'))    # trace back to the parent folder 
 from tasks.task_3.task_3 import DocumentProcessor
 from tasks.task_4.task_4 import EmbeddingClient
 ```
-thus to run the file, you need to type in this command
+thus to run the file, you need to type in this command:
 ```sh
 streamlit run DBCollection.py
 ```
