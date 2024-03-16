@@ -7,6 +7,9 @@
 1. PDF Processing
 2. Embed Model
 3. ChromaDB
+4. Quiz Builder
+5. Quiz Generator
+6. Quiz Manager
 ## 0. Basic Setup
 - create a new project on Google Cloud Console, you can name it as <i>Gemini Quizify</i>
   - go to `vertexAI` and click `enable all recommended APIs`
@@ -80,3 +83,7 @@ streamlit run DBCollection.py
 
 ## 4. Quiz Builder
 Task: Build a Quiz Builder with `Streamlit` and `LangChain` with classes built before.
+
+## 5. Quiz Generator
+
+## 6. Quiz Manager
