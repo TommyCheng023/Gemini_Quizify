@@ -77,3 +77,6 @@ thus to run the file, you need to type in this command:
 streamlit run DBCollection.py
 ```
 2. `Chroma.from_documents()` requires **a string object contains the attribute `page-content`, as well as an embedding function to compute** as parameters. Hence we need to use the `Document()` class imported from `langchain`. Recall we have `texts` defined to collect the splitted text chunks, which its length is needed to be part of the response to the client. We can create a new empty list and apply a `for` loop to go over every object stored in `texts` and create a `Document` object for each of them, then store them into the new declared list using `append()`. **Reminder `Document()` from `langchain` accepts only ONE positional argument, so don't put anything else inside.** 
+
+## 4. Quiz Builder
+Task: Build a Quiz Builder with `Streamlit` and `LangChain` with classes built before.

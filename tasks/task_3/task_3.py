@@ -68,8 +68,7 @@ class DocumentProcessor:
                     num_pages = len(pdf_reader.pages)
                     st.write(f"The PDF contains {num_pages} pages.")
 
-                # Step 3: Then, Add the extracted pages to the 'pages' list.
-                #####################################
+                # Add the extracted pages to the 'pages' list.
                 if uploaded_file is not None:
                     for page_number in range(len(pdf_reader.pages)):
                         page = pdf_reader.pages[page_number]
