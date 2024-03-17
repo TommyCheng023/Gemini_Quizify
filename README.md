@@ -1,6 +1,8 @@
 # Gemini Quizify
 ## Description
-A streamlit app that can <ins>read documents and generate a quiz with 1-10 multiple-choice questions</ins> that allow users to test themselves.
+- The **AI-Generated Quiz Tool** project focuses on providing students and learners with accessible and effective means to reinforce their understanding of various topics. 
+
+- A streamlit app that can <ins>read user-provided documents, offer instand feedback, and dynamically generate a quiz with 1-10 multiple-choice questions with answer keys and explanations prepared</ins> that allow users to test themselves.
 ## Demo
 
 https://github.com/TommyCheng023/Gemini_Quizify/assets/115842289/969ee57c-46f4-4098-8494-0efb7fdb7a79
@@ -155,9 +157,11 @@ st.experimental_rerun()
 
 ## Appendix
 ### Project Certificate
-<ins>Coming Soon!</ins>
+<img width="1017" alt="Screen Shot 2024-03-17 at 6 56 57 PM" src="https://github.com/TommyCheng023/Gemini_Quizify/assets/115842289/4d9dd717-ac87-4650-94b3-369b8290c648">
+
 ### Project Report
-<ins>Coming Soon!</ins>
+[Loom Video](https://www.loom.com/share/b08a5255fd7045a589c35a4dc51ae602)
+
 ### Appreciation
 - Appreciate Radical AI for providing such a precious experience on AI engineering and backend development.
 - I also want to show my gratitude to Talha Sabri and Mikhail Ocampo for detailed instructions.
